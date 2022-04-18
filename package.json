@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "formik": "^2.2.9",
+    "react-firebase-hooks": "^5.0.3",
+    "react-router-dom": "^6.3.0",
+    "yup": "^0.32.11"
+  }
+}
