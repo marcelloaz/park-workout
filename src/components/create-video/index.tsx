@@ -29,7 +29,7 @@ export default function CreateVideoScreen(props: any) {
   const [password, setPassoword] = useState("");
 
   const [errorFire, seterror] = useState("");
-  const [<SETlZAW  ,bk mn</SETlOA>, seterror] = useState("");
+  
   const [newUser, setNewuser] = useState({
     nome: "",
     email: "",
