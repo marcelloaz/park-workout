@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 `;
 
 export const NavButton = styled.button`
-  color: #ffffff;
+  color: #000000;
   opacity: 1;
   position: "absolute";
   margin-top: 180px;

@@ -105,8 +105,6 @@ const opacityIn = keyframes`
 
 export const Area = styled.div`
  flex: 1;
- 
- //height: calc(100vh - 10.5vh);
  background-color: #00000012;
  color: black;
 flex-direction: row;

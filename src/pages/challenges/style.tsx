@@ -1,7 +1,22 @@
 import { isMobile } from "react-device-detect";
 import styled, { keyframes, ThemeProvider } from "styled-components";
 
-
+const fadeIn = keyframes`
+  0% {
+    transform:scale(1);
+  }
+  100% {
+    transform:scale(1.1);
+  }
+`
+const opacityIn = keyframes`
+  0% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 1;
+  }
+`
 
 export const ContentChallenges = styled.div`
   flex: 1;
@@ -42,14 +57,14 @@ export const BoxHome = styled.div`
   opacity: 1;
   
   align-items: "center";
-  justify-content: "space-between";
+  justify-content: "flex-start";
   align-content: "center";
   font-family: "Arial";
   color: "white";
-  min-height: "calc(100vh - 18.8vh)";
+ // min-height: "calc(100vh - 18.8vh)";
   display: "flex";
   font-size: 14;
-  min-width: "calc(100vw - 720px)";
+  //min-width: "calc(100vw - 720px)";
   //width: "calc(100vw - 620px)";
   //width: "100%",
   letter-spacing: "0.4em";
@@ -59,7 +74,6 @@ export const BoxHome = styled.div`
   background-position: "center top";
   background-color: "#1b1b1b14";
   opacity: 1;
-  justify-content: "space-between";
   font-family: "Arial";
   color: "white";
   height: "30px";
@@ -74,7 +88,11 @@ export const BoxHome = styled.div`
 
   `;
 
-
+  export const ShowVideo = styled.button`
+  background-color: transparent;
+  flex: 1;
+  border: none;
+`;
 
 
 export const ButtonPlus = styled.button`
@@ -97,33 +115,27 @@ export const ButtonPlus = styled.button`
 
 
 export const Container = styled.div`
-  justify-content: center;
+  //justify-content: center;
+  cursor: pointer;
   background-color: #00000007;
   border: 1px solid #00000003;
   opacity: 1;
-  margin-bottom: 25px;
   flex-wrap: wrap;
+
   display: flex;
-  min-width: 290px;
-  margin-right: 10px;
+  margin: 20px;
   flex-direction: "row";
-  align-items: stretch;
+  //align-items: flex-end;
   padding: 10px;
   border-radius: 5px;
-  font-size: 10px;
-
-  @media (max-width: 768px) {
-      font-size: 10px;
-     // width:  298px;
-      margin-left: 10px;
-    }
+  font-size: 16px;
+  align-content: flex-start;
 
     ul {
-    margin-block-end: 3em;
     opacity: 1;
-    
+    //align-items: stretch;
     list-style: none;
-    padding: 0px 0px;
+    padding: 10px;
    //background-image: linear-gradient(to top, #00000001 , #00000042,  #00000001);
     li {
       text-align: left;
@@ -137,7 +149,11 @@ export const Container = styled.div`
       }
     }
   }
-
+  &:hover {
+     animation: 305ms ${fadeIn} ease-out infinite alternate;
+     transition: all 305ms;
+        
+  }
 `;
 
 // export const ButtonCheckIn = styled.button`
@@ -180,4 +196,16 @@ export const ButtonCheckIn = styled.button`
     background-color: rgba(0, 0, 0, 0.377);
   }
   
+`;
+
+
+
+export const ButtoNew = styled.button`
+  position: fixed;
+  margin: 10px 10px 70px 10px;
+  bottom: 0%;
+  background-color: transparent;
+  right: 0%;
+  cursor: pointer;
+  border: none;
 `;

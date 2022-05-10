@@ -17,6 +17,7 @@ import imgProfileMock04 from "./../../images/004.png";
 
 //import { navigate } from "gatsby";
 import { isMobile } from "react-device-detect";
+import CreateVideoScreen from "../create-video";
 export default function CheckInComponent(props: any) {
   // const url = location.href ? location.href : "";
   const ref = React.useRef(null);
@@ -125,6 +126,8 @@ const img04 = <img
 
   return (
     <>
+     
+
       {/* {(isMobile) && (<>
     <NavButton onClick={() => { props.changeOpenCloseNav(true) }}>-</NavButton></>)} */}
       <Wrapper >

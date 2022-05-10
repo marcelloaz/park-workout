@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 `;
 
 export const NavButton = styled.button`
-  color: #ffffff;
+  color: #000000;
   opacity: 1;
   position: "absolute";
   //margin-top: 180px;
@@ -117,7 +117,7 @@ export const Container = styled.div`
 
 export const ButtonCheckIn = styled.button`
   
-  color: #ffffff;
+  color: #000000;
   font-size: 1.5em;
   border-radius: 0em;
   padding-left: 25px;

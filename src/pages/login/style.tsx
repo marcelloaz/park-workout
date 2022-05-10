@@ -46,7 +46,7 @@ export const externalLogin = {
 
 
 export const ButtonLogin = styled.button`
-  color: #ffffff;
+  color: #000000;
   font-size: 0.8em;
   border-radius: 0.45em;
   padding-left: 25px;

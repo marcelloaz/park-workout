@@ -66,6 +66,10 @@ export default function SideBarComponent(props: any) {
 
   <MenuOpen ref={ref} active={openMenu}>
 
+
+
+{openMenu && (<>
+
   <div
       style={{
         justifyContent: "center",
@@ -106,15 +110,12 @@ export default function SideBarComponent(props: any) {
         <ContentInner active={isMobile}>
         <ButtonHome onClick={() => { navigate("/login");  setOpenMenu(false)} }  active={openMenu}>Entre</ButtonHome>
         </ContentInner>
-        <ContentInner active={isMobile}>
-        <ButtonHome onClick={() => { navigate("/register");  setOpenMenu(false)} }  active={openMenu}>Criar Conta</ButtonHome>
-        </ContentInner>
     
     </>)}
         
         </>
   </div>
-
+</>)}
   </MenuOpen>
   </>);
 

@@ -2,7 +2,7 @@ import styled, { keyframes, ThemeProvider } from 'styled-components';
 
 export const ButtonLogin = styled.button`
   
-  color: #ffffff;
+  color: #000000;
   font-size: 1em;
   border-radius: 0em;
   padding-left: 10px;

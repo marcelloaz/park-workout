@@ -5,12 +5,13 @@ export const Wrapper = styled.div`
   opacity: 1;
   display: flex;
   width: 350px;
+  flex-direction: column;
   justify-content: flex-end;
   //min-height: calc(100vh - 50vh);
 `;
 
 export const NavButton = styled.button`
-  color: #ffffff;
+  color: #000000;
   opacity: 1;
   position: "absolute";
   margin-top: 180px;
@@ -42,7 +43,8 @@ export const Container = styled.div`
   opacity: ${(props: PropTypeBg) => (props.active ? 1 : 0)}; ;
   display:"flex";
   margin: 0px;
-  width: ${(props: PropTypeBg) => (props.active ? '350px' : '0px')};
+  background-color: red;
+  //width: ${(props: PropTypeBg) => (props.active ? '350px' : '0px')};
   /* animation: ${jitter} 350ms ease-out infinite alternate;
   transform-origin: top;
   transition: all 5s; */
@@ -82,7 +84,7 @@ export const Container = styled.div`
 
 export const ButtonCheckIn = styled.button`
   
-  color: #ffffff;
+  color: #000000;
   font-size: 1.5em;
   border-radius: 0em;
   padding-left: 25px;

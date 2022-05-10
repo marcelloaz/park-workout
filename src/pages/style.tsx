@@ -63,7 +63,7 @@ export const ButtonSendMobile = styled.button`
 `;
 
 export const ButtonSend = styled.button`
-  color: #ffffff;
+  color: #000000;
   font-size: 2.8em;
   border-radius: 0em;
   padding-left: 25px;

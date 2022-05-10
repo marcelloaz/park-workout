@@ -27,13 +27,13 @@ export default function MemberGroupsComponent(props: any) {
 
   const [openClone, setOpenClose] = useState(true);
   React.useEffect(() => {
-    setOpenClose(props.openClone);
+    // setOpenClose(props.openClone);
     
-    setConfirmados(props.checkIn.confirmados);
+    // setConfirmados(props.checkIn.confirmados);
 
-      if(props.checkIn.confirmados != undefined){
-        console.log(props.checkIn.confirmados);
-      }
+    //   if(props.checkIn.confirmados != undefined){
+    //     console.log(props.checkIn.confirmados);
+    //   }
 
 
     // gsap.to(ref?.current, {
@@ -126,39 +126,17 @@ const img04 = <img
 
   return (
     <>
-      {/* {(isMobile) && (<>
-    <NavButton onClick={() => { props.changeOpenCloseNav(true) }}>-</NavButton></>)} */}
-      <Wrapper >
-        <Container active={openClone}>
-          <h3
-            style={{
-              display: "flex",
-              marginLeft: "10px",
-              textAlign: "center",
-              justifyContent: "center",
-            }}
-          >
-            Membros
-          </h3>
-          <ul>
+            <ul>
 
-            {props.checkIn.confirmados != undefined && (<>
-            
-           {Array.from(props.checkIn.confirmados).map((_, i) => (<>
-            <li> 
-             {PhotoProfile(i)}
-             {/* {_.nome} */}
-            </li>
-            </>
-            ))}
-            
-            </>)}
-     
+{Array.from([0,1,2,3,4,5]).map((_, i) => (<>
+  <li> 
+   {/* {PhotoProfile(i)} */}
+   {/* {_.nome} */}
+  </li>
+  </>
+  ))}
 
-          </ul>
-         
-        </Container>
-      </Wrapper>
+</ul>
     </>
   );
 }

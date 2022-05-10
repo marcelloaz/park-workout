@@ -18,7 +18,7 @@ const navigate = useNavigate();
 
   return (
     <>
-     <ButtonBlockXX onClick={() => { navigate("/register") }}>{props.title}</ButtonBlockXX>
+     <ButtonBlockXX onClick={() => { navigate(props.props) }}>{props.title}</ButtonBlockXX>
     </>
   );
 }

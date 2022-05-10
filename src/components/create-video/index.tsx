@@ -10,24 +10,30 @@ import {
   signInWithGoogle
 } from "../../firebase/firebase";
 
-
-import * as Yup from "yup";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
+import * as firebaseConfig from '../../firebaseConfig';
 import { Formik, Field, Form } from "formik";
 import {
   InputLoginWeb,
   ButtonLogin,
-  externalLogin,
-  boxDefaultLogin,
-  textArea,
 } from "./style";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateVideoScreen(props: any) {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, error] = useAuthState(auth);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassoword] = useState("");
+  
+  
+  
+  const app = firebaseConfig.app;
+  const storage = getStorage(app);
+  const [videoAsset, setVideoAsset] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(1);
 
+  
   const [errorFire, seterror] = useState("");
   
   const [newUser, setNewuser] = useState({
@@ -37,114 +43,81 @@ export default function CreateVideoScreen(props: any) {
   });
 
   useEffect(() => {
-    if (loading) return;
-    // if (user) navigate("/home");
-  }, [user, loading]);
+    console.log(videoAsset);
+  }, [videoAsset]);
 
- 
 
-  const SignInSchema = Yup.object().shape({
-    nome: Yup.string().required("Informe o NOME"),
-    email: Yup.string().required("Informe o EMAIL"),
-    senha: Yup.string().required("Informe a SENHA"),
-  });
 
-  const handleInputChange = (event: any) => {
-    setEmail(event.target.value);
+  const uploadImage = (e: any) => {
+    console.log(e.target.files[0]);
 
-    console.log(email);
-  };
+    const videoFile = e.target.files[0];
 
-  const handleInputPasswordChange = (event: any) => {
-    setPassoword(event.target.value);
-   // navigate("/home");
+    const storageRef = ref(storage, `Videos/${Date.now()}-${videoFile.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, videoFile);
 
-    //console.log(password);
-  };
+    uploadTask.on('state_changed', (snapshot) => {
+      const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      
+      setProgress(uploadProgress);
+    }, (error) => {
+       console.log(error);
+    }, () => {
 
-  const submitForm = (event : any) => {
-    console.log(event);
-    registerWithEmailAndPassword("nome", "email", "senha");
-  };
+      getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+        setVideoAsset(url)
+        console.log('downloadurl');
+      });
 
-  const onChange = (e: any): void => {
-    console.log(e.value);
-     setNewuser({
-      nome: e.value,
-      email: "",
-      senha: ""
-    });
+    })
   };
 
   return (
     <>
-<div
-              style={{
-                //marginTop: isMobile ? "30px" : "0px",
-                justifyContent: "center",
-                alignItems: "center",
-                paddingTop: "15px",
-                paddingBottom: "0px",
-                opacity: 1,
-                display: "flex",
-                cursor: "pointer",
-                height: "calc(100vh - 12.1vh)",
-              }}
-            >
+      <div
+        style={{
+        
+          justifyContent: "center",
+          alignItems: "center",
+          paddingTop: "15px",
+          paddingBottom: "0px",
+          opacity: 1,
+          display: "flex",
+          cursor: "pointer",
+          height: "calc(100vh - 12.1vh)",
+        }}
+      >
 
 <form
 onSubmit={async (e: React.SyntheticEvent) => {
-  e.preventDefault();
-  const target = e.target as typeof e.target & {
-    nome: { value: string };
-    email: { value: string };
-    password: { value: string };
+e.preventDefault();
 
-  };
-  const nome = target.nome.value; 
-  const email = target.email.value; 
-  const password = target.password.value; // typechecks!
-  // etc...
-  // console.log(nome);
-  // console.log(email);
-  // console.log(password);
-  const res = await registerWithEmailAndPassword(nome, email, password).then( x => {
-          console.log(x)
-              if(x){
-                 alert("Usuário criado com sucesso!");
-                 navigate("/home");
-               }
-      }
-    );
- // console.log(res);
-  // if(res){
-  //   alert("Usuário criado com sucesso!");
-  // }
+}
+}>
 
-}}>
+  <video src={videoAsset} controls style={{width: "100%", height: "100%"}}/>
 
 <div >
-                Nome <br></br>
-                <InputLoginWeb type="text" name="nome" />
-              </div>
+          Nome <br></br>
+          <InputLoginWeb type="text" name="nome" />
+        </div>
 
-              <div >
-                Email <br></br>
-                <InputLoginWeb type="email" name="email" />
-              </div>
-              <div >
-                Senha <br></br>
-                <InputLoginWeb name='upload-image' onChange={() => {}} type={'file'} accept="video/mp4,video/x-m4v,video/*" />
-              </div>
-              <div>
-                <ButtonLogin type="submit">Enviar</ButtonLogin>
-              </div>
-       
-            </form>
+        <div >
+          Email <br></br>
+          <InputLoginWeb type="email" name="email" />
+        </div>
+        <div >
+          Senha <br></br>
+          <InputLoginWeb name='upload-image' onChange={uploadImage} type={'file'} accept="video/mp4,video/x-m4v,video/*" />
+        </div>
+        <div>
+          <ButtonLogin  type="submit">Enviar</ButtonLogin>
+        </div>
+
+      </form>
 
 
-            </div>
-
+      </div>
     </>
   );
 }

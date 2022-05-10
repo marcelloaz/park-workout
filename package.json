@@ -9,6 +9,7 @@
     "@types/react-dom": "^18.0.0",
     "flexbox-react": "^4.4.0",
     "formik": "^2.2.9",
+    "guid-typescript": "^1.0.9",
     "react": "^17.0.0",
     "react-device-detect": "^2.1.2",
     "react-dom": "^17.0.0",

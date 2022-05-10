@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+
 //import { navigate } from 'gatsby';
 import {
   GoogleAuthProvider,
@@ -9,32 +10,36 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
-  User,
-  Auth,
 } from "firebase/auth";
 import {
   getFirestore,
   query,
   getDocs,
+  getDoc,
   collection,
-  where,
-  addDoc,
+  where,doc, setDoc 
 } from "firebase/firestore";
+import { title } from "process";
+import * as firebaseConfig from '../firebaseConfig';
+import { Guid } from "guid-typescript";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCNHjOubas2DZ8yIY94tvGF6h3DPgnf6nE",
-  authDomain: "park-workout.firebaseapp.com",
-  projectId: "park-workout",
-  storageBucket: "park-workout.appspot.com",
-  messagingSenderId: "468200369681",
-  appId: "1:468200369681:web:1e616d27523f788b8ccbb0",
-  measurementId: "G-KXMBMFCTDR",
-};
-const app = initializeApp(firebaseConfig);
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCNHjOubas2DZ8yIY94tvGF6h3DPgnf6nE",
+//   authDomain: "park-workout.firebaseapp.com",
+//   projectId: "park-workout",
+//   storageBucket: "park-workout.appspot.com",
+//   messagingSenderId: "468200369681",
+//   appId: "1:468200369681:web:1e616d27523f788b8ccbb0",
+//   measurementId: "G-KXMBMFCTDR",
+// };
+
+const app = firebaseConfig.app;
+
 const auth = getAuth(app);
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
+
 
 const signInWithFacebook = async () => {
   try {
@@ -88,19 +93,33 @@ const logInWithEmailAndPassword = async (email: any, password: any) => {
   }
 };
 
+const registerChalleges = async (title: any, video: any, data: any) => {
+  const challegesRef = doc(db, 'challeges', Guid.create().toString());
+  setDoc(challegesRef, { title: title, video: video, data: data}, { merge: true });
+}
+
+const getAllChalleges = async () => {
+  const q = query(collection(db, "challeges"));
+  const querySnapshot = await getDocs(q);
+ return querySnapshot;
+}
+
+const getChallegeId = async (id: any) => {
+  const docRef = doc(db, "challeges", id);
+const docSnap = await getDoc(docRef);
+
+if (docSnap.exists()) {
+  return docSnap.data();
+} else {
+  // doc.data() will be undefined in this case
+  console.log("No such document!");
+}
+}
+
 const registerWithEmailAndPassword = async (name: any, email: any, password: any) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    console.log(user);
-    // await addDoc(collection(db, "users"), {
-    //   uid: user.uid,
-    //   name,
-    //   authProvider: "local",
-    //   email,
-    // });
-
-    // console.log(user);
     
     return true;
   } catch (err) {
@@ -130,5 +149,10 @@ export {
   registerWithEmailAndPassword,
   sendPasswordReset,
   signInWithFacebook,
+  registerChalleges,
   logout,
+  getAllChalleges,
+  getChallegeId,
 };
+
+

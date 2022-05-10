@@ -431,7 +431,7 @@ function IconFor(refBenefit: any) {
 
   const NavButton = styled.button`
     position: absolute;
-    color: #ffffff;
+    color: #000000;
     opacity: 1;
     margin-top: 180px;
     height: 120px;
@@ -568,7 +568,7 @@ function Body(){
               }}
             >
             <ButtonBlockXXComponent
-              title={"Cadastre-se para novos desafios"}
+              title={"Benefícios esportivos".toUpperCase()}
             ></ButtonBlockXXComponent>
    </div>
 
@@ -622,7 +622,7 @@ function Body(){
                 opacity: 1,
               }}
             >
-              Sistema de gestão de DESAFIOS ESPORTIVOS. É fácil acumular vitórias!
+              Sistema de desafios propostos em vídeo.
             </p> 
             
             {!isMobile && (<>
@@ -649,7 +649,7 @@ function Body(){
       </ContentOneOpacite>
 
       <Wrapper> 
-        <p style={{paddingTop: "4px", fontSize: 12, fontFamily: "Arial", letterSpacing: "0.4em"}}> Temos uma solução online que insentiva melhorar sua qualidade de vida. Cadastre-se grátis e descubra.</p>
+        <p style={{paddingTop: "4px", fontSize: 12, fontFamily: "Arial", letterSpacing: "0.4em"}}> Temos uma solução online que insentiva melhorar sua qualidade de vida através de desafios propostos em vídeo</p>
       </Wrapper> 
         {Body()}
         <div
@@ -702,7 +702,7 @@ function Body(){
                         alignContent: "flex-start",
                       }}
                     >
-                    teste
+                    
                     </div>
                   </SectionContentMenuDesktop>
                 </>
